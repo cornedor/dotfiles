@@ -1,0 +1,67 @@
+# search bash history
+function h() {
+    if [ -z "$1" ]
+    then
+        history | grep -v "  h" | sed 's/[ \t]*$//' | sort -k 2 -r | uniq -f 1 | sort -n
+    else
+        history | grep -v "  h" | grep $1 | sed 's/[ \t]*$//' | sort -k 2 -r | uniq -f 1 | sort -n
+    fi
+}
+
+# find shorthand
+function f() {
+    find . -name "$1"
+}
+
+# mkdir and enter it
+function md() {
+	mkdir -p "$@" && cd "$@"
+}
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+function __server() {
+	echo \"SESSIONNAME=$( ls /var/run/screen/S-$USER/$PID* | awk -F"." '{print $2}' ) &&
+	Press CTRL-A, D to put server in background; run screen -r $SESSIONNAME to get back.\" && 
+	http-server;
+}
+
+# Extract archives - use: extract <file>
+# Based on http://dotfiles.org/~pseup/.bashrc
+function extract() {
+	if [ -f "$1" ] ; then
+		local filename=$(basename "$1")
+		local foldername="${filename%%.*}"
+		local fullpath=`perl -e 'use Cwd "abs_path";print abs_path(shift)' "$1"`
+		local didfolderexist=false
+		if [ -d "$foldername" ]; then
+			didfolderexist=true
+			read -p "$foldername already exists, do you want to overwrite it? (y/n) " -n 1
+			echo
+			if [[ $REPLY =~ ^[Nn]$ ]]; then
+				return
+			fi
+		fi
+		mkdir -p "$foldername" && cd "$foldername"
+		case $1 in
+			*.tar.bz2) tar xjf "$fullpath" ;;
+			*.tar.gz) tar xzf "$fullpath" ;;
+			*.tar.xz) tar Jxvf "$fullpath" ;;
+			*.tar.Z) tar xzf "$fullpath" ;;
+			*.tar) tar xf "$fullpath" ;;
+			*.taz) tar xzf "$fullpath" ;;
+			*.tb2) tar xjf "$fullpath" ;;
+			*.tbz) tar xjf "$fullpath" ;;
+			*.tbz2) tar xjf "$fullpath" ;;
+			*.tgz) tar xzf "$fullpath" ;;
+			*.txz) tar Jxvf "$fullpath" ;;
+			*.zip) unzip "$fullpath" ;;
+			*) echo "'$1' cannot be extracted via extract()" && cd .. && ! $didfolderexist && rm -r "$foldername" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
