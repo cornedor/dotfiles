@@ -5,7 +5,7 @@ I've copied a lot from [mathias's](https://github.com/mathiasbynens/dotfiles/) a
 ## Installation
 Git clone this in a folder where you can keep the files, for example `~/dotfiles`, enter that directory and run `setup.sh`. It will than symlink the dotfiles and z from [rupa](https://github.com/rupa/z).
 
-Fore some aliases/functions you need to have some stuff installed
+For some aliases/functions you need to have some stuff installed.
 
 * for `server` you need to have screen installed and NodeJS http-server `npm install http-server -g`
 * for `c` you need Pygments; `pip install pygments`
