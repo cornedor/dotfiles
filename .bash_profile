@@ -1,6 +1,7 @@
-source ~/.exports
-source ~/.aliases
-source ~/.functions
-source ~/.bash_prompt
+for file in ~/.{extra,bash_prompt,exports,aliases,functions,zf}; do
+	[ -r "$file" ] && source "$file"
+done
+unset file
 
-. ~/.zf
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
