@@ -5,6 +5,9 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
+# fix sudo
+alias sudo='sudo '
+
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
