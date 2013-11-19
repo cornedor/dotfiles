@@ -22,7 +22,7 @@ alias lsd="ls -l | grep \"^d\""
 # we do this with a function
 # alias md="mkdir -p"
 
-alias c='clear'
+alias cls='clear'
 alias q='exit'
 
 alias _='sudo '
