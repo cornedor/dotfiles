@@ -1,5 +1,8 @@
 #!/bin/bash
 cd "$(dirname "${BASH_SOURCE}")"
+
+required="node npm perl python screen http-server pygmentize conky weather"
+
 git pull origin master
 
 read -p "Dotfiles from `pwd` will be copied to ${HOME}, is that right? (y/N) " -n 1 -r
@@ -11,20 +14,10 @@ then
     echo "Dotfiles copied"
 fi
 
-if hash screen 2>/dev/null; then
-    echo "\"screen\" found"
-else
-    echo "\"screen\" not found"
-fi
-
-if hash http-server 2>/dev/null; then
-    echo "\"http-server\" found"
-else
-    echo "Run (sudo) npm install -g http-server"
-fi
-
-if hash pygmentize 2>/dev/null; then
-    echo "\"pygmentize\" found"
-else
-    echo "\"pygmentize\" not found"
-fi
+for item in $required; do
+    if hash $item 2>/dev/null; then
+        echo "\"$item\" found"
+    else
+        echo "\"$item\" not found!"
+    fi
+done
