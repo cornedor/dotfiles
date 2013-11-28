@@ -6,7 +6,7 @@ else # OS X `ls`
 fi
 
 # fix sudo
-alias sudo='sudo '
+alias sudo='sudo'
 
 alias ..="cd .."
 alias cd..="cd .."
@@ -25,7 +25,7 @@ alias lsd="ls -l | grep \"^d\""
 alias c='clear'
 alias q='exit'
 
-alias _='sudo'
+alias _='sudo '
 alias _u='sudo aptitude update'
 alias _i='sudo aptitude install'
 alias _s='aptitude search'
