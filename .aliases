@@ -22,7 +22,7 @@ alias lsd="ls -l | grep \"^d\""
 # we do this with a function
 # alias md="mkdir -p"
 
-alias c='clear'
+alias cls='clear'
 alias q='exit'
 
 alias _='sudo '
@@ -33,7 +33,7 @@ alias _s='aptitude search'
 alias ni="npm install"
 alias n="node"
 
-# You need to have http-server isntalled; npm install http-server -g
+# You need to have http-server installed; npm install http-server -g
 alias server="screen bash -c 'echo \"Press CTRL-A, D to put server in background; run screen -r \$STY to get back.\" && http-server'"
 
 # You need to have Pygments installed; sudo pip install Pygments

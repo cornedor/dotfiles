@@ -30,7 +30,7 @@ The .extra file has some private configs which are not part of this repo.
     * `l` is an alias for `ls -a` (all ls's add --color)
     * `ll` is an alias for 'ls -al'
     * `lsd` shows all folders
-    * `c` is an alias for `clear`
+    * `cls` is an alias for `clear`
     * `q` is an alias for `exit`
     * `_` is an alias for `sudo`
     * `_i` is an alias for `sudo aptitude isntall`
