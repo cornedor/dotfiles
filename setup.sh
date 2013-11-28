@@ -1,20 +1,30 @@
 #!/bin/bash
-
-dir=`pwd`
-files="bashrc zf bash_profile bash_prompt exports functions aliases"
-
+cd "$(dirname "${BASH_SOURCE}")"
 git pull origin master
 
-read -p "Dotfiles from `pwd` will be linked to ${HOME}, is that right? (y/N) " -n 1 -r
+read -p "Dotfiles from `pwd` will be copied to ${HOME}, is that right? (y/N) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	echo 'Setting up dotfiles'
-	# make backup dir
-	mkdir -p ${dir}/backup
+    rsync --exclude ".git/" --exclude "setup.sh" --exclude "README.md" -av --no-perms . ~
+    source ~/.bash_profile
+    echo "Dotfiles copied"
+fi
 
-	for file in $files; do
-		mv ~/.$file ${dir}/backup
-		ln -s $dir/.$file ~/.$file
-	done
+if hash screen 2>/dev/null; then
+    echo "\"screen\" found"
+else
+    echo "\"screen\" not found"
+fi
+
+if hash http-server 2>/dev/null; then
+    echo "\"http-server\" found"
+else
+    echo "Run (sudo) npm install -g http-server"
+fi
+
+if hash pygmentize 2>/dev/null; then
+    echo "\"pygmentize\" found"
+else
+    echo "\"pygmentize\" not found"
 fi
